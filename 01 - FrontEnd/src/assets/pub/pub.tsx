@@ -1,14 +1,15 @@
 import "./pub.css";
+import "./answer.css";
+import { ReactNode, useState } from "react";
 
-interface Props {
-  data: {
-    name: string;
-    date: string;
-    status: string;
-  };
+//#region Main Comment
+
+interface CommentProps {
+  data: Data;
+  answers: ReactNode[];
 }
 
-function Post({ data }: Props) {
+function Comment({ data, answers }: CommentProps) {
   let text;
   let icon;
 
@@ -49,11 +50,80 @@ function Post({ data }: Props) {
         </div>
       </div>
       <div className="pub__body">
-        Gostaria de saber o horário da prova, vai ser postada no quadro de
-        avisos?
-        <div className="pub__body__comments">4 Respostas</div>
+        {data.body}
+        <hr></hr>
+        <div className="pub__body__comments_count">
+          {data.count} {data.count == 1 ? "Resposta" : "Respostas"}
+        </div>
       </div>
+      {answers.map((ans, index) => {
+        return <div key={index}>{ans}</div>;
+      })}
     </div>
+  );
+}
+
+//#endregion
+
+//#region Answers
+
+interface PropsAnswer {
+  data: Data;
+}
+
+function Answer(data: Data) {
+  return (
+    <div className="ans">
+      <div className="ans__head">
+        <div className="ans__head__info">
+          <div className="ans__head__info__pic"></div>
+          <span className="ans__head__info__name">{data.name}</span>
+        </div>
+        <div className="ans__head__data">
+          <span className="ans__head__data__date">{data.date}</span>
+        </div>
+      </div>
+      <div className="ans__body">{data.body}</div>
+    </div>
+  );
+}
+
+//#endregion
+
+interface Data {
+  name: string;
+  date: string;
+  status?: string;
+  body: string;
+  count?: number;
+}
+
+function Post(data: Data) {
+  const [showing, setShowing] = useState(
+    data.count !== undefined && data.count > 0 ? 1 : 0
+  );
+
+  console.log(data.count);
+
+  return (
+    <>
+      <Comment
+        data={data}
+        answers={[
+          <Answer
+            name="Rafael Henrique"
+            date="Há 5 minutos."
+            body="Ouvi falar pelos grupos que são postadas uma semana antes, mas não tenho certeza, alguem pode confirmar?"
+          />,
+        ]}
+      />
+      {data.count !== undefined && data.count > showing ? (
+        <>
+          <div className="comment_expand">Ver mais...</div>
+          <div className="comment_shadow"></div>
+        </>
+      ) : null}
+    </>
   );
 }
 
