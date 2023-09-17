@@ -107,6 +107,7 @@
 .comment_expand:hover {
   color: white;
   background-color: rgb(100, 100, 100);
+  user-select: none;
 }
 
 .comment_shadow {

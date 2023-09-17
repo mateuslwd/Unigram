@@ -1,6 +1,6 @@
 import "./pub.css";
 import "./answer.css";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
 //#region Main Comment
 
@@ -88,6 +88,18 @@ function Answer(data: Data) {
   );
 }
 
+function ExpandComment() {
+  const handleClikc = () => {
+    console.log("Expandindo");
+  };
+
+  return (
+    <div onClick={handleClikc} className="comment_expand">
+      Ver mais...
+    </div>
+  );
+}
+
 //#endregion
 
 interface Data {
@@ -103,7 +115,19 @@ function Post(data: Data) {
     data.count !== undefined && data.count > 0 ? 1 : 0
   );
 
-  console.log(data.count);
+  const [comment, setComment] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/comment/Rafael/1")
+      .then((response) => response.json())
+      .then((data) => {
+        setComment(data);
+        console.log(comment);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>
@@ -119,7 +143,7 @@ function Post(data: Data) {
       />
       {data.count !== undefined && data.count > showing ? (
         <>
-          <div className="comment_expand">Ver mais...</div>
+          <ExpandComment />
           <div className="comment_shadow"></div>
         </>
       ) : null}
