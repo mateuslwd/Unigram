@@ -1,0 +1,39 @@
+.postCreate {
+  --width: 80dvw;
+  --height: 7dvh;
+  --lrpad: 3%;
+  --udpad: 0.5%;
+
+  width: calc(var(--width) - (var(--lrpad) * 2));
+  height: calc(var(--height) - (var(--udpad) * 2));
+  background-color: rgb(156, 156, 156);
+  border-radius: calc(7dvh);
+  line-height: 7dvh;
+
+  padding: var(--udpad) var(--lrpad);
+
+  font-size: 0.8em;
+
+  resize: none;
+  border: none;
+  outline: none;
+
+  transition: all 0.4s ease;
+}
+
+.postCreate--opened {
+  --height: 25dvh;
+  --lrpad: 3%;
+  --udpad: 3%;
+
+  height: calc(var(--height) - (var(--udpad) * 2));
+
+  padding: var(--udpad) var(--lrpad);
+
+  padding-bottom: 1.5em;
+
+  line-height: 1.3em;
+
+  background-color: rgb(156, 156, 156);
+  border-radius: 8px;
+}

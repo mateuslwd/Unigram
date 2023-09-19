@@ -1,0 +1,41 @@
+.postCreateAction {
+  --height: 6dvh;
+
+  width: 80dvw;
+  height: var(--height);
+
+  margin-top: calc(var(--height) / -2);
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.postCreateAction__holder {
+  display: flex;
+  justify-content: center;
+}
+
+.postCreateAction__action {
+  background-color: gray;
+  height: var(--height);
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  cursor: default;
+  user-select: none;
+}
+
+.postCreateAction__left {
+  width: var(--height);
+
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postCreateAction__right {
+  padding: 0 10px;
+  font-size: 0.8em;
+  margin-left: 5px;
+}
